@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="gradiente_drawable" type="id" />
+    <item name="gradient_drawable" type="id" />
+</resources>
