@@ -44,9 +44,11 @@ class MovieTask(private val callback: Callback) {
                     val jsomStream = stream.bufferedReader().use {
                         it.readText()
                     }
+                    val json = JSONObject(jsomStream)
+                    val message = json.getString("message")
+                    throw IOException(message)
                 }else if (statusCode > 400) {
                     throw IOException("Erro na comunicacao")
-                    Log.i("deu ruim", "deu ruim")
                 }
                 stream = urlConnection.inputStream
                 val jsomStream = stream.bufferedReader().use {
@@ -74,6 +76,7 @@ class MovieTask(private val callback: Callback) {
         val id= json.getInt("id")
         val title = json.getString("title")
         val desc = json.getString("desc")
+        val cast = json.getString("cast")
         val coverUrl = json.getString("cover_url")
         val jsonMovies = json.getJSONArray("movie")
         val similares = mutableListOf<Movie>()
@@ -85,7 +88,8 @@ class MovieTask(private val callback: Callback) {
             val mov = Movie(similarId,similarCoverId)
             similares.add(mov)
         }
-        val movie = Movie(id, coverUrl, title, desc)
+        val movie = Movie(id, coverUrl, title, desc, cast)
         return MovieDetail(movie,similares)
     }
+
 }
