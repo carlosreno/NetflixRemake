@@ -92,7 +92,6 @@ class MovieActivity : AppCompatActivity(), MovieTask.Callback {
             }
 
         }).execute(movieDetail.movie.coverUrl)
-
     }
 
     override fun onFailure(message: String) {
